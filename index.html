@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Texto Dinâmico com Animação</title>
+    <style>
+      @font-face {
+        font-family: 'MinhaFonte';
+        src: url('PPMonumentExtended-Black.otf') format('opentype');
+      }
+      body {
+        font-family: 'MinhaFonte', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #000;
+        color: #f5f5fa;
+      }
+      .container {
+        width: 300px;
+        font-size: 24px;
+        overflow: hidden;
+        text-align: center;
+      }
+      .dynamic-container {
+        display: inline-block;
+        transition: width 0.4s ease;
+      }
+      .dynamic-word {
+        display: inline-block;
+        transition: transform 0.3s, opacity 0.3s;
+      }
+      .slide-up {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      p {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        quer <span class="dynamic-container"><span id="dynamic-word" class="dynamic-word">vídeo</span></span>?
+        <p>a Muuvies faz.</p>
+      </div>
+    </div>
+
+    <script>
+      const words = ["vídeo", "foto", "conteúdo"];
+      let index = 0;
+      const dynamicWordElement = document.getElementById("dynamic-word");
+      const dynamicContainer = document.querySelector(".dynamic-container");
+
+      setInterval(() => {
+        dynamicWordElement.classList.add("slide-up");
+
+        setTimeout(() => {
+          index = (index + 1) % words.length;
+          dynamicWordElement.textContent = words[index];
+          dynamicContainer.style.width = dynamicWordElement.offsetWidth + 'px';
+          dynamicWordElement.classList.remove("slide-up");
+        }, 200);
+      }, 1800);
+    </script>
+  </body>
+</html>
